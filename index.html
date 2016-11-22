@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang=" " ng-app="app">
+
+<head>
+    <title>GitHub Profiler</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+</head>
+
+<body>
+    <div class="container" ng-controller="GitHubController as github">
+        <div class="panel">
+            <div class="panel-body">
+                <div class="well">
+                    <h1>GitHub Profiler</h1>
+                    <p class="lead">Find out information about any GitHub user!</p>
+                </div>
+                <div class="col-lg-12">
+                    <form ng-submit="github.callGitHubApi()">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Username" ng-model="github.username"></input>
+                            <span class="input-group-btn">
+        <button class="btn btn-default" type="button" ng-click="github.callGitHubApi()">Go!</button>
+      </span>
+                        </div>
+                    </form>
+                </div>
+                <!-- /input-group -->
+            </div>
+            <!-- /.col-lg-6 -->
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-md-3">
+                <div class="panel-body text-center">
+                    <img ng-src="{{github.userinfo.avatar_url}}" class="img-circle img-responsive">
+                    <b>{{github.userinfo.name}}</b> {{github.userinfo.login}}
+                    <p>{{github.userinfo.location}}</p>
+                    <p ng-class=github.color>{{github.userinfo.hireable}}</p>
+                    <p id="hide" style="visibility: hidden;">Slinging code since {{github.userinfo.created_at | date: 'MMM d, y'}}</p>
+                    <a href="https://github.com/{{github.userinfo.login}}?tab=repositories">
+                        <button class="btn btn-default" type="button" ng-click="github.callGitHubApi()" id="hiden" style="visibility: hidden;">View Repositories</button>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-6 col-md-3 text-center">
+                <div class="panel-body">
+                    <div class="well">
+                        <p class="lead">Followers</p>
+                        <p>{{github.userinfo.followers}}</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Add the extra clearfix for only the required viewport -->
+            <div class="clearfix visible-xs-block"></div>
+            <div class="col-md-6 col-md-3 text-center">
+                <div class="panel-body">
+                    <div class="well">
+                        <p class="lead">Following</p>
+                        <p>{{github.userinfo.following}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-md-3 text-center">
+                <div class="panel-body">
+                    <div class="well">
+                        <p class="lead">Public Repositories</p>
+                        <p>{{github.userinfo.public_repos}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+    </div>
+    </div>
+    <!-- jQuery -->
+    <script src="//code.jquery.com/jquery.js"></script>
+    <!-- Bootstrap JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="app/app.module.js"></script>
+    <script src="app/home/GitHubController.controller.js"></script>
+</body>
+
+</html>
